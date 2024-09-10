@@ -33,6 +33,7 @@
 
 import { NgrokService } from './ngrokService';
 import { defaultRestServerOptions, EmulatorRestServer, EmulatorRestServerOptions } from './server/restServer';
+import { getSettings } from './state/store';
 
 let emulator: Emulator;
 /**
@@ -68,12 +69,17 @@ export class Emulator {
     return this._server;
   }
 
+  private async getServiceUrl(s: string) {
+    if (s) return s;
+    else return `http://localhost:${Emulator.getInstance().server.serverPort}`;
+  }
+
   /** Initializes the emulator rest server. No-op if already called. */
   public initServer(options: EmulatorRestServerOptions = defaultRestServerOptions): void {
     if (!this._server) {
       this._server = new EmulatorRestServer({
         ...options,
-        getServiceUrl: botUrl => this.ngrok.getServiceUrl(botUrl),
+        getServiceUrl: botUrl => this.getServiceUrl(getSettings().framework.tunnelUrl),
         getServiceUrlForOAuth: () => this.ngrok.getServiceUrlForOAuth(),
         shutDownOAuthNgrokInstance: () => this.ngrok.shutDownOAuthNgrokInstance(),
       });
