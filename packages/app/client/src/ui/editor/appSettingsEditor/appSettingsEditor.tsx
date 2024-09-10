@@ -106,12 +106,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
 
   public render(): JSX.Element {
     const {
-      ngrokPath = '',
       useCustomId = false,
-      bypassNgrokLocalhost = true,
-      runNgrokAtStartup = false,
-      localhost = '',
-      locale = '',
       use10Tokens = false,
       useCodeValidation = false,
       userGUID = '',
@@ -129,85 +124,6 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     return (
       <GenericDocument className={styles.appSettingsEditor}>
         <Row>
-          <Column className={styles.spacing}>
-            <div>
-              <span className={styles.legend}>Service</span>
-              <p>
-                <LinkButton linkRole={true} onClick={this.onNgrokDocsClick}>
-                  ngrok
-                </LinkButton>{' '}
-                is network tunneling software. The Bot Framework Emulator works with ngrok to communicate with bots
-                hosted remotely. Read the{' '}
-                <LinkButton linkRole={true} onClick={this.onNgrokTunnelingDocsClick}>
-                  wiki page
-                </LinkButton>{' '}
-                to learn more about using ngrok and how to download it.
-              </p>
-              <Row align={RowAlignment.Center} className={styles.marginBottomRow}>
-                <TextField
-                  className={styles.appSettingsInput}
-                  inputContainerClassName={styles.inputContainer}
-                  inputRef={this.setNgrokInputRef}
-                  readOnly={false}
-                  value={ngrokPath}
-                  onChange={this.onInputChange}
-                  name="ngrokPath"
-                  label={'Path to ngrok'}
-                />
-                <PrimaryButton onClick={this.onClickBrowse} text="Browse" className={styles.browseButton} />
-              </Row>
-              <Checkbox
-                className={styles.checkboxOverrides}
-                checked={bypassNgrokLocalhost}
-                onChange={this.onChangeCheckBox}
-                id="ngrok-bypass"
-                aria-label="Bypass ngrok for local addresses, Service"
-                label="Bypass ngrok for local addresses"
-                name="bypassNgrokLocalhost"
-              />
-              <Checkbox
-                className={styles.checkboxOverrides}
-                checked={runNgrokAtStartup}
-                onChange={this.onChangeCheckBox}
-                id="ngrok-startup"
-                aria-label="Run ngrok when the Emulator starts up, Service"
-                label="Run ngrok when the Emulator starts up"
-                name="runNgrokAtStartup"
-              />
-              <Row align={RowAlignment.Center} className={styles.marginBottomRow}>
-                <TextField
-                  className={styles.appSettingsInput}
-                  inputContainerClassName={styles.inputContainer}
-                  readOnly={false}
-                  value={localhost}
-                  onChange={this.onInputChange}
-                  name="localhost"
-                  label="localhost override"
-                />
-              </Row>
-              <Row align={RowAlignment.Center}>
-                <TextField
-                  className={styles.appSettingsInput}
-                  inputContainerClassName={styles.inputContainer}
-                  readOnly={false}
-                  value={locale}
-                  name="locale"
-                  onChange={this.onInputChange}
-                  label="Locale"
-                />
-              </Row>
-              {/* <div className={styles.tunnelStatus}>
-                <NgrokStatusIndicator
-                  tunnelStatus={this.props.ngrokTunnelStatus}
-                  timeIntervalSinceLastPing={this.props.ngrokLastPingInterval}
-                  header="Tunnel Status"
-                />
-                <LinkButton linkRole={true} onClick={this.props.onOpenNgrokStatusViewerClick}>
-                  Click here to go to the Ngrok Status viewer
-                </LinkButton>
-              </div> */}
-            </div>
-          </Column>
           <Column className={[styles.rightColumn, styles.spacing].join(' ')}>
             <div>
               <span className={styles.legend}>User settings</span>
@@ -333,28 +249,12 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     this.updateDirtyFlag(change);
   };
 
-  private onClickBrowse = async (): Promise<void> => {
-    const ngrokPath = await this.props.openBrowseForNgrok();
-    if (ngrokPath === null) {
-      return; // Cancelled browse dialog
-    }
-    const change = { ngrokPath };
-    this.setState(change);
-    this.updateDirtyFlag(change);
-  };
-
   private onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value, name } = event.target;
     const change = { [name]: value };
     this.setState(change);
     this.updateDirtyFlag(change);
   };
-
-  private onNgrokDocsClick = this.createAnchorClickHandler('https://ngrok.com/');
-
-  private onNgrokTunnelingDocsClick = this.createAnchorClickHandler(
-    'https://github.com/Microsoft/BotFramework-Emulator/wiki/Tunneling-(ngrok)'
-  );
 
   private onPrivacyStatementClick = this.createAnchorClickHandler('https://privacy.microsoft.com/privacystatement');
 
@@ -378,10 +278,6 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     this.setState({ dirty });
     this.props.setDirtyFlag(dirty);
   }
-
-  private setNgrokInputRef = (ref: HTMLInputElement): void => {
-    this.pathToNgrokInputRef = ref;
-  };
 
   private getLocalPort = async () => {
     const lp = await ipcRenderer.invoke('local-server-port');
