@@ -52,6 +52,8 @@ import { generateHash } from '../../../state/helpers/botHelpers';
 
 import * as styles from './appSettingsEditor.scss';
 
+import { ipcRenderer } from 'electron';
+
 export interface AppSettingsEditorProps {
   documentId?: string;
   dirty?: boolean;
@@ -88,7 +90,6 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     if (newProps.framework.hash === prevState.hash) {
       return prevState;
     }
-
     return {
       ...newProps.framework,
       dirty: newProps.dirty,
@@ -96,11 +97,13 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     };
   }
 
-  public componentDidMount(): void {
+  public async componentDidMount(): Promise<void> {
     if (this.pathToNgrokInputRef) {
       this.pathToNgrokInputRef.focus();
     }
+    this.state.localPort = await this.getLocalPort();
   }
+
   public render(): JSX.Element {
     const {
       ngrokPath = '',
@@ -116,6 +119,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
       usePrereleases = false,
       collectUsageData = false,
       tunnelUrl = '',
+      localPort = 0,
     } = this.state;
 
     const inputProps = {
@@ -273,6 +277,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
             </div>
             <div>
               <span className={styles.legend}>Tunnel URL</span>
+              <span>Configure a tunnel to port {localPort}</span>
               <TextField
                 className={styles.appSettingsInput}
                 inputContainerClassName={styles.inputContainer}
@@ -357,12 +362,10 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     // trim keys that do not belong and generate a hash
     const settings = this.state;
     const keys = Object.keys(frameworkDefault).sort();
-    console.log(keys);
     const newState = keys.reduce((s, key) => ((s[key] = settings[key]), s), {}) as FrameworkSettings;
     newState.hash = await generateHash(newState);
 
     this.setState({ dirty: false });
-    console.log(newState);
     this.props.saveFrameworkSettings(newState);
     this.props.createAriaAlert('App settings saved.');
     if (this.pathToNgrokInputRef) {
@@ -378,5 +381,11 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
 
   private setNgrokInputRef = (ref: HTMLInputElement): void => {
     this.pathToNgrokInputRef = ref;
+  };
+
+  private getLocalPort = async () => {
+    const lp = await ipcRenderer.invoke('local-server-port');
+    console.log('LOCAL PORT', lp);
+    return lp;
   };
 }

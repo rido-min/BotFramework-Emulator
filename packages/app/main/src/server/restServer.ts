@@ -52,6 +52,8 @@ import { ConsoleLogService } from './state/consoleLogService';
 import { stripEmptyBearerTokenMiddleware } from './routes/handlers/stripEmptyBearerToken';
 import { Conversation } from './state/conversation';
 
+import { ipcMain } from 'electron';
+
 export interface EmulatorRestServerOptions {
   fetch?: (url: string, options?: any) => Promise<any>;
   getServiceUrl?: (botUrl: string) => Promise<string>;
@@ -161,6 +163,9 @@ export class EmulatorRestServer {
       this._serverPort = actualPort;
       this._serverUrl = this.server.url;
       console.log('Server listens on port', actualPort);
+      ipcMain.handle('local-server-port', () => {
+        return actualPort;
+      });
     } catch (e) {
       if (e.code === 'EADDRINUSE') {
         // eslint-disable-next-line

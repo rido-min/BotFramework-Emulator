@@ -65,6 +65,7 @@ export interface FrameworkSettings {
   useCustomId?: boolean;
   // tunnel Url
   tunnelUrl?: string;
+  localPort?: number;
 }
 
 export interface WindowStateSettings {
