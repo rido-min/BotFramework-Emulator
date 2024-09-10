@@ -63,6 +63,8 @@ export interface FrameworkSettings {
   userGUID?: string;
   // use custom user id
   useCustomId?: boolean;
+  // tunnel Url
+  tunnelUrl?: string;
 }
 
 export interface WindowStateSettings {
@@ -131,6 +133,7 @@ export const frameworkDefault: FrameworkSettings = {
   hasBeenShownDataCollectionModal: false,
   userGUID: '',
   useCustomId: false,
+  tunnelUrl: '',
 };
 
 export const windowStateDefault: WindowStateSettings = {

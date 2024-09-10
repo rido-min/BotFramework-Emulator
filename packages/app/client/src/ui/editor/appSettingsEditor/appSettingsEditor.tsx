@@ -47,8 +47,8 @@ import { ChangeEvent } from 'react';
 
 import { GenericDocument } from '../../layout';
 import { generateHash } from '../../../state/helpers/botHelpers';
-import { TunnelCheckTimeInterval, TunnelStatus } from '../../../state/actions/ngrokTunnelActions';
-import { NgrokStatusIndicator } from '../ngrokDebugger/ngrokStatusIndicator';
+//import { TunnelCheckTimeInterval, TunnelStatus } from '../../../state/actions/ngrokTunnelActions';
+//import { NgrokStatusIndicator } from '../ngrokDebugger/ngrokStatusIndicator';
 
 import * as styles from './appSettingsEditor.scss';
 
@@ -56,8 +56,8 @@ export interface AppSettingsEditorProps {
   documentId?: string;
   dirty?: boolean;
   framework?: FrameworkSettings;
-  ngrokTunnelStatus?: TunnelStatus;
-  ngrokLastPingInterval?: TunnelCheckTimeInterval;
+  //ngrokTunnelStatus?: TunnelStatus;
+  //ngrokLastPingInterval?: TunnelCheckTimeInterval;
 
   createAriaAlert?: (msg: string) => void;
   discardChanges?: () => void;
@@ -115,6 +115,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
       autoUpdate = false,
       usePrereleases = false,
       collectUsageData = false,
+      tunnelUrl = '',
     } = this.state;
 
     const inputProps = {
@@ -191,7 +192,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
                   label="Locale"
                 />
               </Row>
-              <div className={styles.tunnelStatus}>
+              {/* <div className={styles.tunnelStatus}>
                 <NgrokStatusIndicator
                   tunnelStatus={this.props.ngrokTunnelStatus}
                   timeIntervalSinceLastPing={this.props.ngrokLastPingInterval}
@@ -200,7 +201,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
                 <LinkButton linkRole={true} onClick={this.props.onOpenNgrokStatusViewerClick}>
                   Click here to go to the Ngrok Status viewer
                 </LinkButton>
-              </div>
+              </div> */}
             </div>
           </Column>
           <Column className={[styles.rightColumn, styles.spacing].join(' ')}>
@@ -268,6 +269,18 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
                 aria-label="Use pre-release versions, Application Updates"
                 label="Use pre-release versions"
                 name="usePrereleases"
+              />
+            </div>
+            <div>
+              <span className={styles.legend}>Tunnel URL</span>
+              <TextField
+                className={styles.appSettingsInput}
+                inputContainerClassName={styles.inputContainer}
+                readOnly={false}
+                value={tunnelUrl}
+                name="tunnelUrl"
+                onChange={this.onInputChange}
+                label="Tunnel Url"
               />
             </div>
             <div>
@@ -344,10 +357,12 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     // trim keys that do not belong and generate a hash
     const settings = this.state;
     const keys = Object.keys(frameworkDefault).sort();
+    console.log(keys);
     const newState = keys.reduce((s, key) => ((s[key] = settings[key]), s), {}) as FrameworkSettings;
     newState.hash = await generateHash(newState);
 
     this.setState({ dirty: false });
+    console.log(newState);
     this.props.saveFrameworkSettings(newState);
     this.props.createAriaAlert('App settings saved.');
     if (this.pathToNgrokInputRef) {
