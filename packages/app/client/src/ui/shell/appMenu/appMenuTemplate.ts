@@ -102,13 +102,6 @@ export class AppMenuTemplate {
       { type: 'separator' },
       { label: 'Open Transcript...', onClick: () => AppMenuTemplate.commandService.call(PromptToOpenTranscript) },
       { type: 'separator' },
-      {
-        label: 'Open Ngrok Status Viewer...',
-        onClick: () => {
-          AppMenuTemplate.commandService.remoteCall(OpenStatusViewer);
-        },
-      },
-      { type: 'separator' },
       { label: 'Close tab', disabled: true, onClick: () => AppMenuTemplate.commandService.call(Close) },
       { type: 'separator' },
       { label: 'Sign in with Azure' }, // onClick defined later

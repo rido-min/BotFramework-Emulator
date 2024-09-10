@@ -16,7 +16,7 @@
     "lint:fix": "npm run lint -- --fix",
     "pack": "electron-builder --config scripts/config/getElectronBuilderConfig.js --dir",
     "start": "concurrently --kill-others --names \"electron,react-app\" --success first \"npm run start:electron:dev\" \"npm run start:react-app\"",
-    "start:electron": "./node_modules/.bin/electron --inspect=7777 --remote-debugging-port=7778 .",
+    "start:electron": "electron --inspect=7777 --remote-debugging-port=7778 .",
     "start:electron:dev": "cross-env ELECTRON_TARGET_URL=http://localhost:3000/ npm run start:electron",
     "start:react-app": "cd ../client && npm start",
     "start:watch": "nodemon",
