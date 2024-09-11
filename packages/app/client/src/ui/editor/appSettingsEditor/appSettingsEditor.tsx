@@ -60,10 +60,8 @@ export interface AppSettingsEditorProps {
   createAriaAlert?: (msg: string) => void;
   discardChanges?: () => void;
   onAnchorClick?: (url: string) => void;
-  openBrowseForNgrok: () => Promise<string>;
   saveFrameworkSettings?: (framework: FrameworkSettings) => void;
   setDirtyFlag?: (dirty: boolean) => void;
-  onOpenNgrokStatusViewerClick: () => void;
 }
 
 export interface AppSettingsEditorState extends Partial<FrameworkSettings> {
@@ -77,7 +75,6 @@ function shallowEqual(x: any, y: any) {
 
 export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, AppSettingsEditorState> {
   public state = {} as AppSettingsEditorState;
-  private pathToNgrokInputRef: HTMLInputElement;
 
   public static getDerivedStateFromProps(
     newProps: AppSettingsEditorProps,
@@ -94,9 +91,6 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
   }
 
   public async componentDidMount(): Promise<void> {
-    if (this.pathToNgrokInputRef) {
-      this.pathToNgrokInputRef.focus();
-    }
     this.setState({ localPort: await this.getLocalPort() });
   }
 
@@ -265,9 +259,6 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     this.setState({ dirty: false });
     this.props.saveFrameworkSettings(newState);
     this.props.createAriaAlert('App settings saved.');
-    if (this.pathToNgrokInputRef) {
-      this.pathToNgrokInputRef.focus();
-    }
   };
 
   private updateDirtyFlag(change: { [prop: string]: any }) {

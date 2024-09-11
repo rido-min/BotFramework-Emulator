@@ -34,12 +34,6 @@
 import { Bot } from './botTypes';
 
 export interface FrameworkSettings {
-  // path to use for ngrok
-  ngrokPath?: string;
-  // option for deciding whether to bypass ngrok for bots on localhost
-  bypassNgrokLocalhost?: boolean;
-  // option to run ngrok when the emulator starts
-  runNgrokAtStartup?: boolean;
   stateSizeLimit?: number;
   // option for using 2.0 or 1.0 tokens
   use10Tokens?: boolean;
@@ -120,9 +114,6 @@ export class SettingsImpl implements Settings {
 }
 
 export const frameworkDefault: FrameworkSettings = {
-  ngrokPath: '',
-  bypassNgrokLocalhost: true,
-  runNgrokAtStartup: false,
   stateSizeLimit: 64,
   use10Tokens: false,
   useCodeValidation: false,
