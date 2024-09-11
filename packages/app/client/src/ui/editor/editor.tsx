@@ -39,7 +39,7 @@ import { Document } from '../../state/reducers/editor';
 
 import { MarkdownPage } from './markdownPage/markdownPage';
 
-import { AppSettingsEditorContainer, EmulatorContainer, WelcomePageContainer, NgrokDebuggerContainer } from './index';
+import { AppSettingsEditorContainer, EmulatorContainer, WelcomePageContainer } from './index';
 
 interface EditorFactoryProps {
   document?: Document;
