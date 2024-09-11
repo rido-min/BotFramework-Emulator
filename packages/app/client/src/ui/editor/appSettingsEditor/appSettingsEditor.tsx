@@ -185,15 +185,17 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
               <span className={styles.legend}>Configure Tunnel</span>
               <span>Configure a tunnel to port {localPort}: </span>
               <b contentEditable="true">devtunnel host -a -p {localPort}</b>
-              <TextField
-                className={styles.appSettingsInput}
-                inputContainerClassName={styles.inputContainer}
-                readOnly={false}
-                value={tunnelUrl}
-                name="tunnelUrl"
-                onChange={this.onInputChange}
-                label="Tunnel Url"
-              />
+              <Row className={styles.marginBottomRow} align={RowAlignment.Top}>
+                <TextField
+                  className={styles.appSettingsInput}
+                  inputContainerClassName={styles.inputContainer}
+                  readOnly={false}
+                  value={tunnelUrl}
+                  name="tunnelUrl"
+                  onChange={this.onInputChange}
+                  label="Tunnel Url"
+                />
+              </Row>
             </div>
             <div>
               <span className={styles.legend}>Data Collection</span>
