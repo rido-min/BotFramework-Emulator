@@ -77,9 +77,6 @@ export class EditorFactory extends React.Component<EditorFactoryProps> {
           />
         );
 
-      case SharedConstants.ContentTypes.CONTENT_TYPE_NGROK_DEBUGGER:
-        return <NgrokDebuggerContainer documentId={document.documentId} dirty={this.props.document.dirty} />;
-
       default:
         return false;
     }

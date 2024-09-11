@@ -290,10 +290,10 @@ export class AppMenuBuilder {
     ]);
     subMenu.push({ type: 'separator' });
     subMenu.push({
-      label: 'Copy Emulator service URL',
+      label: 'Copy Emulator Port',
       click: async () => {
-        const url = await Emulator.getInstance().ngrok.getServiceUrl('');
-        clipboard.writeText(url);
+        const port = await Emulator.getInstance().server.serverPort;
+        clipboard.writeText(port.toString());
       },
     });
     subMenu.push({ type: 'separator' });

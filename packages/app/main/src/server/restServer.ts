@@ -142,7 +142,7 @@ export class EmulatorRestServer {
     this.state = new ServerState(this.options.fetch);
     this.getServiceUrl = this.options.getServiceUrl;
     this.getServiceUrlForOAuth = this.options.getServiceUrlForOAuth;
-    this.shutDownOAuthNgrokInstance = this.options.shutDownOAuthNgrokInstance;
+    //this.shutDownOAuthNgrokInstance = this.options.shutDownOAuthNgrokInstance;
     return (server = this);
   }
 

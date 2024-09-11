@@ -31,7 +31,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import { NgrokService } from './ngrokService';
 import { defaultRestServerOptions, EmulatorRestServer, EmulatorRestServerOptions } from './server/restServer';
 import { getSettings } from './state/store';
 
@@ -40,12 +39,7 @@ let emulator: Emulator;
  * Top-level state container for the Node process.
  */
 export class Emulator {
-  public ngrok: NgrokService;
   private _server: EmulatorRestServer;
-
-  private constructor() {
-    this.ngrok = new NgrokService();
-  }
 
   public static initialize(): void {
     if (!emulator) {
@@ -80,8 +74,8 @@ export class Emulator {
       this._server = new EmulatorRestServer({
         ...options,
         getServiceUrl: botUrl => this.getServiceUrl(getSettings().framework.tunnelUrl),
-        getServiceUrlForOAuth: () => this.ngrok.getServiceUrlForOAuth(),
-        shutDownOAuthNgrokInstance: () => this.ngrok.shutDownOAuthNgrokInstance(),
+        getServiceUrlForOAuth: () => this.getServiceUrl(getSettings().framework.tunnelUrl),
+        //shutDownOAuthNgrokInstance: () => this.ngrok.shutDownOAuthNgrokInstance(),
       });
     }
   }
@@ -97,6 +91,6 @@ export class Emulator {
 
   public async report(conversationId: string, botUrl: string): Promise<void> {
     this.server.report(conversationId);
-    await this.ngrok.report(conversationId, botUrl);
+    //await this.ngrok.report(conversationId, botUrl);
   }
 }
