@@ -121,6 +121,8 @@ describe('The AppSettingsEditorContainer', () => {
         use10Tokens: false,
         useCodeValidation: false,
         usePrereleases: false,
+        tunnelUrl: '',
+        localPort: 0,
       })
     );
     mockDispatch = jest.spyOn(mockStore, 'dispatch');
