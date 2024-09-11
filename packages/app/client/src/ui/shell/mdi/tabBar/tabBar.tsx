@@ -193,11 +193,7 @@ export class TabBar extends React.Component<TabBarProps, TabBarState> {
           ref={this.setRef}
           role="presentation"
         >
-          {documentId === SharedConstants.DocumentIds.DOCUMENT_ID_NGROK_DEBUGGER ? (
-            <NgrokTabContainer {...commonProps} />
-          ) : (
-            <Tab {...commonProps} />
-          )}
+          <Tab {...commonProps} />
         </div>
       );
     });
@@ -290,9 +286,6 @@ export class TabBar extends React.Component<TabBarProps, TabBarState> {
 
       case CONTENT_TYPE_DEBUG:
         return 'Debug';
-
-      case CONTENT_TYPE_NGROK_DEBUGGER:
-        return 'Ngrok Status';
 
       default:
         return '';

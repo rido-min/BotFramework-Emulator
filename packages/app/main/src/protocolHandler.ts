@@ -255,9 +255,7 @@ class ProtocolHandlerImpl implements ProtocolHandler {
       await this.commandService.call(SharedConstants.Commands.Bot.SetActive, bot);
       await this.commandService.remoteCall(SharedConstants.Commands.Bot.Load, bot);
     } catch (e) {
-      throw new Error(
-        `(ngrok not configured) Error occurred while trying to deep link to bot project at ${path}: ${e}`
-      );
+      throw new Error(`Error occurred while trying to deep link to bot project at ${path}: ${e}`);
     }
 
     const numOfServices = bot.services && bot.services.length;

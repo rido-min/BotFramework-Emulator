@@ -75,7 +75,6 @@ export class Emulator {
         ...options,
         getServiceUrl: botUrl => this.getServiceUrl(getSettings().framework.tunnelUrl),
         getServiceUrlForOAuth: () => this.getServiceUrl(getSettings().framework.tunnelUrl),
-        //shutDownOAuthNgrokInstance: () => this.ngrok.shutDownOAuthNgrokInstance(),
       });
     }
   }
@@ -91,6 +90,5 @@ export class Emulator {
 
   public async report(conversationId: string, botUrl: string): Promise<void> {
     this.server.report(conversationId);
-    //await this.ngrok.report(conversationId, botUrl);
   }
 }

@@ -36,7 +36,7 @@ import { INTERNAL_SERVER_ERROR, OK } from 'http-status-codes';
 
 import { EmulatorRestServer } from '../../../restServer';
 
-/* sends the initial conversation report to the log panel (ngrok and server url) */
+/* sends the initial conversation report to the log panel server url */
 export function createInitialReportHandler(emulatorServer: EmulatorRestServer) {
   return (req: Request, res: Response, next: Next): any => {
     const { conversationId } = req.params;
