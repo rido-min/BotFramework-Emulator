@@ -47,8 +47,6 @@ import { ChangeEvent } from 'react';
 
 import { GenericDocument } from '../../layout';
 import { generateHash } from '../../../state/helpers/botHelpers';
-//import { TunnelCheckTimeInterval, TunnelStatus } from '../../../state/actions/ngrokTunnelActions';
-//import { NgrokStatusIndicator } from '../ngrokDebugger/ngrokStatusIndicator';
 
 import * as styles from './appSettingsEditor.scss';
 
@@ -58,8 +56,6 @@ export interface AppSettingsEditorProps {
   documentId?: string;
   dirty?: boolean;
   framework?: FrameworkSettings;
-  //ngrokTunnelStatus?: TunnelStatus;
-  //ngrokLastPingInterval?: TunnelCheckTimeInterval;
 
   createAriaAlert?: (msg: string) => void;
   discardChanges?: () => void;

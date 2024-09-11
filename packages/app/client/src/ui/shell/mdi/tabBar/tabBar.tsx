@@ -44,10 +44,8 @@ import {
   CONTENT_TYPE_MARKDOWN,
   CONTENT_TYPE_TRANSCRIPT,
   CONTENT_TYPE_WELCOME_PAGE,
-  CONTENT_TYPE_NGROK_DEBUGGER,
 } from '../../../../constants';
 import { Tab } from '../tab/tab';
-import { NgrokTabContainer } from '../tab/ngrokTabContainer';
 
 import * as styles from './tabBar.scss';
 

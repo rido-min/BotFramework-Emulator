@@ -35,7 +35,6 @@ import {
   close as closeEditorDocument,
   executeCommand,
   framework,
-  ngrokTunnel,
   saveFrameworkSettings,
   setFrameworkSettings,
   SharedConstants,
@@ -106,7 +105,7 @@ describe('The AppSettingsEditorContainer', () => {
   });
 
   beforeEach(() => {
-    mockStore = createStore(combineReducers({ framework, ngrokTunnel }));
+    mockStore = createStore(combineReducers({ framework }));
     mockStore.dispatch(
       setFrameworkSettings({
         autoUpdate: true,
