@@ -101,7 +101,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
     if (this.pathToNgrokInputRef) {
       this.pathToNgrokInputRef.focus();
     }
-    this.state.localPort = await this.getLocalPort();
+    this.setState({ localPort: await this.getLocalPort() });
   }
 
   public render(): JSX.Element {
@@ -114,7 +114,7 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
       usePrereleases = false,
       collectUsageData = false,
       tunnelUrl = '',
-      localPort = 0,
+      localPort = 321,
     } = this.state;
 
     const inputProps = {
@@ -192,8 +192,9 @@ export class AppSettingsEditor extends React.Component<AppSettingsEditorProps, A
               />
             </div>
             <div>
-              <span className={styles.legend}>Tunnel URL</span>
-              <span>Configure a tunnel to port {localPort}</span>
+              <span className={styles.legend}>Configure Tunnel</span>
+              <span>Configure a tunnel to port {localPort}: </span>
+              <b contentEditable="true">devtunnel host -a -p {localPort}</b>
               <TextField
                 className={styles.appSettingsInput}
                 inputContainerClassName={styles.inputContainer}

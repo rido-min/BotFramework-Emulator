@@ -135,6 +135,7 @@ export const frameworkDefault: FrameworkSettings = {
   userGUID: '',
   useCustomId: false,
   tunnelUrl: '',
+  localPort: 0,
 };
 
 export const windowStateDefault: WindowStateSettings = {
