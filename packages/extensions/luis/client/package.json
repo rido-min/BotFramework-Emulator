@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --hot --mode development --content-base ./public",
-    "build": "webpack --mode production",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "lint": "eslint --color --quiet --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "npm run lint -- --fix",
     "test": ""

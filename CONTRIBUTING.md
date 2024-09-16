@@ -37,7 +37,7 @@ cd BotFramework-Emulator
 
 ### Install global dependencies
 
-> **NOTE:** Due to the version of Electron that the Emulator uses, it's recommended to use **Node v16.13.2** or above when building the project from source.
+> **NOTE:** Due to the version of Electron that the Emulator uses, it's recommended to use **Node v20.17.0** or above when building the project from source.
 >
 > **npm version 7.0.0** or greater is also required.
 

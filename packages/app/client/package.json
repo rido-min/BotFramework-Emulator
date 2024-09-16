@@ -10,7 +10,7 @@
     "build:app": "webpack --mode production",
     "build:shared:dev": "webpack --mode development --progress",
     "build:app:dev": "webpack --mode development --progress",
-    "build": "run-s build:vendors build:shared build:app",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider run-s build:vendors build:shared build:app",
     "lint": "eslint --color --quiet --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "npm run lint -- --fix",
     "start": "run-s build:shared:dev webpackdevServer:dev",
