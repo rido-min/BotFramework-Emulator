@@ -1,0 +1,50 @@
+name: Build Electron App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.17.0'
+
+    - name: Install npx
+      run: npm install -g lerna@6.1.0
+
+    - name: Bootstrap
+      run: npm run bootstrap
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Build
+      run: npm run build
+
+    - name: Get Electron
+      working-directory: packages\app\main
+      run: node scripts\downloadAndExtractElectron.js
+
+    - name: Pack Windows
+      working-directory: packages\app\main
+      run: npm run pack -- --win --x64
+
+    - name: Pack Linux
+      working-directory: packages\app\main
+      run: npm run pack -- --linux --x64
+
+    - name: Pack Mac
+      working-directory: packages\app\main
+      run: npm run pack -- --mac --x64
