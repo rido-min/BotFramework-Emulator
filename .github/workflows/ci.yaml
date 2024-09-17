@@ -39,9 +39,9 @@ jobs:
       working-directory: packages/app/main
       run: node scripts/downloadAndExtractElectron.js
 
-    - name: Pack Windows
-      working-directory: packages/app/main
-      run: npm run pack -- --win --x64
+    # - name: Pack Windows
+    #   working-directory: packages/app/main
+    #   run: npm run pack -- --win --x64
 
     - name: Pack Linux
       working-directory: packages/app/main
