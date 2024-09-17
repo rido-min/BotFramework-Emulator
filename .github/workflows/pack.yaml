@@ -79,8 +79,8 @@ jobs:
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v4
       with:
-        name: BF-Emulator-Windows.msi
-        path: packages/app/main/dist/*.msi
+        name: BF-Emulator-Windows.setup.exe
+        path: packages/app/main/dist/*.exe
 
     - name: Pack Mac
       if: matrix.os == 'macos-latest'
