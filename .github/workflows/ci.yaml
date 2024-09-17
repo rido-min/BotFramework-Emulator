@@ -39,6 +39,9 @@ jobs:
       working-directory: packages/app/main
       run: node scripts/downloadAndExtractElectron.js
 
+    - name: Check for vulnerabilities
+      run: npm audit
+
     # - name: Pack Windows
     #   working-directory: packages/app/main
     #   run: npm run pack -- --win --x64
@@ -46,7 +49,19 @@ jobs:
     - name: Pack Linux
       working-directory: packages/app/main
       run: npm run pack -- --linux --x64
+      env:
+        NODE_ENV: production
 
-    - name: Pack Mac
+    - name: Dist Linux
       working-directory: packages/app/main
-      run: npm run pack -- --mac --x64
+      run: npm run dist -- --linux --prepackaged ./dist/linux-unpacked
+
+    - name: Upload Linux
+      uses: actions/upload-artifact@v3
+      with:
+        name: BF-Emulator
+        path: packages/app/main/dist/*.AppImage
+
+    # - name: Pack Mac
+    #   working-directory: packages/app/main
+    #   run: npm run pack -- --mac --x64
