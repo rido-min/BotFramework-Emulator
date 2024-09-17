@@ -32,6 +32,9 @@ jobs:
 
     - name: Build
       run: npm run build
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
+
 
     - name: Get Electron
       working-directory: packages\app\main
