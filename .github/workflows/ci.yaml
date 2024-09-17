@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Node.js 20.17.0
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '20.17.0'
 
@@ -54,7 +54,7 @@ jobs:
       run: npm run dist -- --linux --prepackaged ./dist/linux-unpacked
 
     - name: Upload Linux
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: packages/app/main/dist/*.AppImage
 
