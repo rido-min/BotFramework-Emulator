@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: '20.17.0'
 
-    - name: Install npx
+    - name: Install lerna 6.1.0
       run: npm install -g lerna@6.1.0
 
     - name: Bootstrap
