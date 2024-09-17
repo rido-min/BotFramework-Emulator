@@ -14,14 +14,18 @@
     "jest": "^29.7.0"
   },
   "jest": {
-    "setupFilesAfterEnv": ["../../../../testSetup.js"],
+    "setupFilesAfterEnv": [
+      "../../../../testSetup.js"
+    ],
     "transform": {
       "^.+\\.(tsx?|jsx?)$": "babel-jest",
       "^.+\\.(ts?|js?)$": "babel-jest"
     },
     "testEnvironment": "jsdom",
     "testEnvironmentOptions": {
-      "customExportConditions": ["node"],
+      "customExportConditions": [
+        "node"
+      ],
       "url": "http://localhost"
     },
     "rootDir": "./client",
