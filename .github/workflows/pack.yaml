@@ -1,7 +1,6 @@
 name: Build Electron App
 
-on:
-  workflow-dispatch:
+workflow-dispatch:
 
 jobs:
   build:
