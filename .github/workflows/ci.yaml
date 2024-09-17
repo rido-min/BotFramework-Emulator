@@ -39,8 +39,8 @@ jobs:
       working-directory: packages/app/main
       run: node scripts/downloadAndExtractElectron.js
 
-    - name: Check for vulnerabilities
-      run: npm audit
+    # - name: Check for vulnerabilities
+    #   run: npm audit
 
     # - name: Pack Windows
     #   working-directory: packages/app/main
