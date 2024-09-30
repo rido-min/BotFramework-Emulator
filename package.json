@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist --ignore @bfemulator/tools -- --lockfile-version=1",
-    "bootstrap:dev": "lerna bootstrap --hoist -- --lockfile-version=1",
+    "bootstrap": "npm install",
+    "bootstrap:dev": "npm install",
     "build": "npm rebuild node-sass && npm run rebuild:keytar:electron && npm run build --workspaces",
     "lint": "lerna run lint --no-bail",
     "lint:fix": "lerna run lint:fix --no-bail",
